@@ -59,6 +59,7 @@ try
     trajectory = zeros(steps, params.agent.num, 3);
     boundary_distances = zeros(1, steps);
     plume_extent = zeros(1, steps);
+    monitored_fraction = zeros(1, steps);
     prev_cen = [];
 
     for step = 1:steps
@@ -68,6 +69,7 @@ try
         H_adaptive(step) = coverage_quality(pos_adaptive, sd, t, params);
         trajectory(step, :, :) = pos_adaptive;
         boundary_distances(step) = sd.boundary_distance;
+        monitored_fraction(step) = compute_monitoring_fraction(pos_adaptive, sd.boundary_points, params);
         plume_extent(step) = estimate_plume_extent(t, params);
 
         pos_static = static_coverage(pos_static, t, params);
@@ -112,7 +114,7 @@ try
     exportgraphics(gcf, fullfile(save_dir, 'step8_boundary_tracking.png'), 'Resolution', 150);
     %close(gcf);
 
-    write_step8_analysis(save_dir, H_adaptive, H_static, H_random, boundary_distances, plume_extent, params);
+    write_step8_analysis(save_dir, H_adaptive, H_static, H_random, boundary_distances, plume_extent, monitored_fraction, params);
     assert(exist(fullfile(save_dir, '结果分析.md'), 'file') == 2, '结果分析.md 未生成');
     fprintf('  [PASS] Step8图片和结果分析已保存\n');
     pass_count = pass_count + 1;

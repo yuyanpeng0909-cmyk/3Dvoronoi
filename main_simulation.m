@@ -89,7 +89,7 @@ function main_simulation()
 
     create_dynamic_plume_gif(trajectory_adaptive, params, fullfile(save_dir, 'step8_dynamic_plume_monitoring.gif'));
 
-    write_step8_analysis(save_dir, H_adaptive, H_static, H_random, boundary_distances, plume_extent, params);
+    write_step8_analysis(save_dir, H_adaptive, H_static, H_random, boundary_distances, plume_extent, monitored_fraction, params);
 
     fprintf('\n所有图表和结果分析已保存到: %s\n', save_dir);
 end
