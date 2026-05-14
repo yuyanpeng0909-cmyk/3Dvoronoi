@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.5.13)  13 MAY 2026 20:44
+This is XeTeX, Version 3.141592653-2.6-0.999998 (MiKTeX 26.2) (preloaded format=xelatex 2026.5.13)  14 MAY 2026 16:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./main_zh.tex
-(main_zh.tex
+**./paper/main_zh.tex
+(paper/main_zh.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-03-20>
 (D:\Miktex\tex/latex/ieeetran\IEEEtran.cls
@@ -392,7 +392,8 @@ Package fontspec Info:
 (fontspec)             - 'normal' (m/n) with NFSS spec.:
 (fontspec)             <->"SimSun/OT:script=hani;language=dflt;"
 
- (main_zh.aux)
+
+(D:\science\3Dvoronoi\paper\main_zh.aux)
 \openout1 = `main_zh.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -526,13 +527,15 @@ r/m/n/10 )\OML/cmm/m/it/10 :
 [2]
 File: figures/step8_plume_agents_tracking.png Graphic file (type bmp)
 <figures/step8_plume_agents_tracking.png>
+ [3]
 File: figures/step8_voronoi_3d.png Graphic file (type bmp)
 <figures/step8_voronoi_3d.png>
+File: figures/step8_coverage_regions_3d.png Graphic file (type bmp)
+<figures/step8_coverage_regions_3d.png>
 File: figures/step8_coverage_quality.png Graphic file (type bmp)
 <figures/step8_coverage_quality.png>
 File: figures/step8_coverage_metrics.png Graphic file (type bmp)
 <figures/step8_coverage_metrics.png>
- [3]
 File: figures/step8_control_input.png Graphic file (type bmp)
 <figures/step8_control_input.png>
  [4]
@@ -549,7 +552,7 @@ Before submitting the final camera ready copy, remember to:
 
 [5
 
-] (main_zh.aux)
+] (D:\science\3Dvoronoi\paper\main_zh.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2022/08/05>
@@ -560,12 +563,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 8189 strings out of 402806
- 205083 string characters out of 5452359
- 707360 words of memory out of 5000000
- 36947 multiletter control sequences out of 15000+600000
+ 8210 strings out of 402806
+ 206196 string characters out of 5452359
+ 707382 words of memory out of 5000000
+ 36965 multiletter control sequences out of 15000+600000
  633526 words of font info for 118 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 74i,11n,92p,563b,428s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,11n,92p,569b,428s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main_zh.xdv (5 pages, 109396 bytes).
+Output written on D:\science\3Dvoronoi\paper\main_zh.xdv (5 pages, 118368 bytes
+).

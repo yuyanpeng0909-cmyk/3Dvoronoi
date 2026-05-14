@@ -1,10 +1,12 @@
 # Fdb version 4
-["xdvipdfmx"] 1778676244.17103 "main_zh.xdv" "main_zh.pdf" "main_zh" 1778676246.91812 0
-  "main_zh.xdv" 1778676243.77271 109396 67757c7e300508f15d97d86593fbb532 "xelatex"
+["xdvipdfmx"] 1778747371.73998 "paper/main_zh.xdv" "paper/main_zh.pdf" "paper/main_zh" 1778747374.97446 0
+  "main_zh.xdv" 0 -1 0 ""
+  "paper/main_zh.xdv" 1778747371.3793 118368 59be8f340aee025ba103ea043f438a76 "xelatex"
   (generated)
   "main_zh.pdf"
+  "paper/main_zh.pdf"
   (rewritten before read)
-["xelatex"] 1778676241.89002 "main_zh.tex" "main_zh.xdv" "main_zh" 1778676246.89767 0
+["xelatex"] 1778747369.69097 "paper/main_zh.tex" "paper/main_zh.xdv" "main_zh" 1778747374.95458 0
   "C:/Users/25758/AppData/Local/MiKTeX/miktex/data/le/xetex/xelatex.fmt" 1778676173.29323 27182426 e2e69c82a66d580d8b3fdfe20d158074 ""
   "D:/Miktex/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
   "D:/Miktex/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1233951848 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -60,15 +62,17 @@
   "D:/Miktex/tex/xelatex/xecjk/xeCJK.cfg" 1659726270 408 7369c27beaa819c5f46de3795b22ee3e ""
   "D:/Miktex/tex/xelatex/xecjk/xeCJK.sty" 1659726270 183137 ed372550124703b2b73cbcc0b47cb20f ""
   "D:/Miktex/tex/xelatex/xecjk/xeCJKfntef.sty" 1659726270 39577 b470f8a1dbecc9c45c9bf05ca7db9188 ""
-  "figures/step8_control_input.png" 1778656628.70133 62240 0e1261a0e65fd4d7d2939f3a68c7f9e6 ""
-  "figures/step8_coverage_metrics.png" 1778656628.63089 108414 1c9a065f3a1f80fa7485bcb7e3fb737f ""
-  "figures/step8_coverage_quality.png" 1778656628.56056 69440 ffaed04fbde23f8a06ca32a138d591ef ""
-  "figures/step8_plume_agents_tracking.png" 1778656628.4174 170015 c54e234d8d05c47cc5d419291ce5106e ""
-  "figures/step8_voronoi_3d.png" 1778656628.49163 388367 b23944add63d4e0ca8c86489972d6449 ""
-  "main_zh.aux" 1778676243.77074 3440 6dc9b3ed74bc0fc4f1a4a5bd6c9c3951 "xelatex"
-  "main_zh.tex" 1778675723.01038 20512 cae9e0e975c97ed0e48d3612e1c493dc ""
+  "D:/science/3Dvoronoi/paper/main_zh.aux" 1778747371.37726 3633 7a4c6ceaf7d39eb6a01235dd295d0179 ""
+  "paper/figures/step8_control_input.png" 1778746814.25643 60280 1dbdb7ec44853bd8e414f042a1afeee5 ""
+  "paper/figures/step8_coverage_metrics.png" 1778746814.19443 107409 ec9bbf1df3129b653b8f6c60b716714b ""
+  "paper/figures/step8_coverage_quality.png" 1778746814.13023 67677 16b79f79512becc5fd541d81ea5bed98 ""
+  "paper/figures/step8_coverage_regions_3d.png" 1778746814.31574 344689 961331a168d76f8c44211285ec0c426d ""
+  "paper/figures/step8_plume_agents_tracking.png" 1778746814.00007 172249 d5cc9ef4605915cfc944679dee199fa2 ""
+  "paper/figures/step8_voronoi_3d.png" 1778746814.06623 368646 759bff4e072f43587e655cb5ddcd543a ""
+  "paper/main_zh.aux" 1778747371.37726 3633 7a4c6ceaf7d39eb6a01235dd295d0179 "xelatex"
+  "paper/main_zh.tex" 1778747124.68541 22082 f89069a42688b5aa9ac80e0a66768b2a ""
   (generated)
-  "main_zh.aux"
-  "main_zh.log"
-  "main_zh.xdv"
+  "paper/main_zh.aux"
+  "paper/main_zh.log"
+  "paper/main_zh.xdv"
   (rewritten before read)

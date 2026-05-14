@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1778676446.45485 "main_en.tex" "main_en.pdf" "main_en" 1778676447.99942 0
+["pdflatex"] 1778747381.72644 "paper/main_en.tex" "paper/main_en.pdf" "main_en" 1778747383.23404 0
   "C:/Users/25758/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1778663575.33544 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/25758/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1778664280.23691 13333478 8cea890895cf6e41ba4ea85a74f5a12a ""
   "D:/Miktex/fonts/enc/dvips/base/8r.enc" 1458473887 4993 1194fb36dfcb11d9ae9802f2b00b60a3 ""
@@ -85,15 +85,17 @@
   "D:/Miktex/tex/latex/l3backend/l3backend-pdftex.def" 1774811737 30909 7dedb28cb21a1e79c47a35a35ae3c507 ""
   "D:/Miktex/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 39eda417ef5837ce5e38661cfad2cedf ""
   "D:/Miktex/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "figures/step8_control_input.png" 1778656628.70133 62240 0e1261a0e65fd4d7d2939f3a68c7f9e6 ""
-  "figures/step8_coverage_metrics.png" 1778656628.63089 108414 1c9a065f3a1f80fa7485bcb7e3fb737f ""
-  "figures/step8_coverage_quality.png" 1778656628.56056 69440 ffaed04fbde23f8a06ca32a138d591ef ""
-  "figures/step8_plume_agents_tracking.png" 1778656628.4174 170015 c54e234d8d05c47cc5d419291ce5106e ""
-  "figures/step8_voronoi_3d.png" 1778656628.49163 388367 b23944add63d4e0ca8c86489972d6449 ""
-  "main_en.aux" 1778676447.45928 3744 21b7887fe9534fdaa1f2ba63d5521db8 "pdflatex"
-  "main_en.tex" 1778676420.70161 26755 a4b7f1ee672cbb44c20d5fe8256fc49a ""
+  "D:/science/3Dvoronoi/paper/main_en.aux" 1778747382.71024 3950 6d2625f7bbf7985bc49b9faa16d8fd10 ""
+  "paper/figures/step8_control_input.png" 1778746814.25643 60280 1dbdb7ec44853bd8e414f042a1afeee5 ""
+  "paper/figures/step8_coverage_metrics.png" 1778746814.19443 107409 ec9bbf1df3129b653b8f6c60b716714b ""
+  "paper/figures/step8_coverage_quality.png" 1778746814.13023 67677 16b79f79512becc5fd541d81ea5bed98 ""
+  "paper/figures/step8_coverage_regions_3d.png" 1778746814.31574 344689 961331a168d76f8c44211285ec0c426d ""
+  "paper/figures/step8_plume_agents_tracking.png" 1778746814.00007 172249 d5cc9ef4605915cfc944679dee199fa2 ""
+  "paper/figures/step8_voronoi_3d.png" 1778746814.06623 368646 759bff4e072f43587e655cb5ddcd543a ""
+  "paper/main_en.aux" 1778747382.71024 3950 6d2625f7bbf7985bc49b9faa16d8fd10 "pdflatex"
+  "paper/main_en.tex" 1778747255.70258 28720 40d2dfca61e72bc14480c75cb9539cca ""
   (generated)
-  "main_en.aux"
-  "main_en.log"
-  "main_en.pdf"
+  "paper/main_en.aux"
+  "paper/main_en.log"
+  "paper/main_en.pdf"
   (rewritten before read)

@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.13)  13 MAY 2026 20:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.5.13)  14 MAY 2026 17:09
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **./main_en.tex
 (main_en.tex
@@ -17,8 +18,7 @@ Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 \@IEEEtrantmpcountB=\count276
 \@IEEEtrantmpcountC=\count277
 \@IEEEtrantmptoksA=\toks17
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
-03.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 503.
 (D:\Miktex\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -26,8 +26,7 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 -- Using PDF output.
 \@IEEEnormalsizeunitybaselineskip=\dimen153
 -- This is a 10 point document.
-LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding ?) o
-n input line 937.
+LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding ?) on input line 937.
 \CLASSINFOnormalsizebaselineskip=\dimen154
 \CLASSINFOnormalsizeunitybaselineskip=\dimen155
 \IEEEnormaljot=\dimen156
@@ -35,52 +34,42 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
 (Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
-
 \IEEEquantizedlength=\dimen157
 \IEEEquantizedlengthdiff=\dimen158
 \IEEEquantizedtextheightdiff=\dimen159
@@ -128,17 +117,14 @@ Package: amsmath 2025/07/09 v2.17z AMS math features
 For additional information on amsmath, use the `?' option.
 (D:\Miktex\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
-
-(D:\Miktex\tex/latex/amsmath\amsgen.sty
+ (D:\Miktex\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks18
 \ex@=\dimen174
-))
-(D:\Miktex\tex/latex/amsmath\amsbsy.sty
+)) (D:\Miktex\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen175
-)
-(D:\Miktex\tex/latex/amsmath\amsopn.sty
+) (D:\Miktex\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count290
@@ -188,23 +174,18 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
-)
-(D:\Miktex\tex/latex/amsfonts\amssymb.sty
+) (D:\Miktex\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(D:\Miktex\tex/latex/amsfonts\amsfonts.sty
+ (D:\Miktex\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(D:\Miktex\tex/latex/algorithms\algorithm.sty
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
-nment
-
-(D:\Miktex\tex/latex/float\float.sty
+)) (D:\Miktex\tex/latex/algorithms\algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+ (D:\Miktex\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count302
 \float@exts=\toks23
@@ -216,11 +197,9 @@ Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks25
 \c@algorithm=\count303
-)
-(D:\Miktex\tex/latex/algorithms\algorithmic.sty
+) (D:\Miktex\tex/latex/algorithms\algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-
-(D:\Miktex\tex/latex/graphics\keyval.sty
+ (D:\Miktex\tex/latex/graphics\keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks26
 )
@@ -230,38 +209,30 @@ Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \c@ALC@depth=\count307
 \ALC@tlm=\skip55
 \algorithmicindent=\skip56
-)
-(D:\Miktex\tex/latex/graphics\graphicx.sty
+) (D:\Miktex\tex/latex/graphics\graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
-
-(D:\Miktex\tex/latex/graphics\graphics.sty
+ (D:\Miktex\tex/latex/graphics\graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-
-(D:\Miktex\tex/latex/graphics\trig.sty
+ (D:\Miktex\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-)
-(D:\Miktex\tex/latex/graphics-cfg\graphics.cfg
+) (D:\Miktex\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
-
-(D:\Miktex\tex/latex/graphics-def\pdftex.def
+ (D:\Miktex\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen183
 \Gin@req@width=\dimen184
-)
-(D:\Miktex\tex/latex/base\textcomp.sty
+) (D:\Miktex\tex/latex/base\textcomp.sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 ) (D:\Miktex\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
-
-(D:\Miktex\tex/latex/graphics-cfg\color.cfg
+ (D:\Miktex\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 274.
-
-(D:\Miktex\tex/latex/graphics\mathcolor.ltx)
+ (D:\Miktex\tex/latex/graphics\mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -271,8 +242,7 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
-)
-(D:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
+) (D:\Miktex\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count308
 ) (main_en.aux)
@@ -309,82 +279,77 @@ LaTeX Font Info:    ... okay on input line 14.
 \everyMPtoPDFconversion=\toks28
 ) (D:\Miktex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-85.
-
-(D:\Miktex\tex/latex/00miktex\epstopdf-sys.cfg
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (D:\Miktex\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
-
-
-(D:\Miktex\tex/latex/amsfonts\umsa.fd
+LaTeX Font Info:    Trying to load font information for U+msa on input line 49.
+ (D:\Miktex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
  (D:\Miktex\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
 []\OT1/ptm/m/n/10 A continuous-release three-dimensional advection--
  []
 
 
-Underfull \hbox (badness 7168) in paragraph at lines 42--43
-\OT1/ptm/m/n/10 diffusion--decay plume model is de-vel-oped us-ing
+Underfull \hbox (badness 2435) in paragraph at lines 49--50
+\OT1/ptm/m/n/10 diffusion--decay plume model is de-vel-oped through
  []
 
 
-Underfull \hbox (badness 1484) in paragraph at lines 43--44
+Underfull \hbox (badness 1484) in paragraph at lines 50--51
 []\OT1/ptm/m/n/10 A volume-based three-dimensional Voronoi cov-er-age
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1{C:/Users/25758/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{D:/Miktex/
-fonts/enc/dvips/base/8r.enc}
+[1{C:/Users/25758/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{D:/Miktex/fonts/enc/dvips/base/8r.enc}
 
 
 ] [2] [3]
-Underfull \hbox (badness 6775) in paragraph at lines 364--366
+Underfull \hbox (badness 6775) in paragraph at lines 371--373
 \OT1/ptm/m/n/10 The lawn-mower method fol-lows a pre-planned three-
  []
 
-[4]
-<figures/step8_plume_agents_tracking.png, id=33, 632.6034pt x 491.436pt>
+<figures/step8_plume_agents_tracking.png, id=25, 659.5842pt x 490.4724pt>
 File: figures/step8_plume_agents_tracking.png Graphic file (type png)
 <use figures/step8_plume_agents_tracking.png>
-Package pdftex.def Info: figures/step8_plume_agents_tracking.png  used on input
- line 403.
-(pdftex.def)             Requested size: 252.0pt x 195.76105pt.
-<figures/step8_voronoi_3d.png, id=34, 691.8648pt x 499.6266pt>
+Package pdftex.def Info: figures/step8_plume_agents_tracking.png  used on input line 410.
+(pdftex.def)             Requested size: 252.0pt x 187.3843pt.
+<figures/step8_voronoi_3d.png, id=26, 695.7192pt x 489.027pt>
 File: figures/step8_voronoi_3d.png Graphic file (type png)
 <use figures/step8_voronoi_3d.png>
-Package pdftex.def Info: figures/step8_voronoi_3d.png  used on input line 411.
-(pdftex.def)             Requested size: 252.0pt x 181.97719pt.
-<figures/step8_coverage_quality.png, id=35, 623.931pt x 389.2944pt>
+Package pdftex.def Info: figures/step8_voronoi_3d.png  used on input line 418.
+(pdftex.def)             Requested size: 252.0pt x 177.13156pt.
+[4]
+<figures/step8_coverage_regions_3d.png, id=35, 696.6828pt x 512.1534pt>
+File: figures/step8_coverage_regions_3d.png Graphic file (type png)
+<use figures/step8_coverage_regions_3d.png>
+Package pdftex.def Info: figures/step8_coverage_regions_3d.png  used on input line 426.
+(pdftex.def)             Requested size: 252.0pt x 185.25034pt.
+
+Underfull \hbox (badness 1371) in paragraph at lines 431--432
+[]\OT1/ptm/m/n/10 Fig. 4[] com-pares the cov-er-age qual-ity. Stan-dard CVT
+ []
+
+<figures/step8_coverage_quality.png, id=36, 622.9674pt x 389.2944pt>
 File: figures/step8_coverage_quality.png Graphic file (type png)
 <use figures/step8_coverage_quality.png>
-Package pdftex.def Info: figures/step8_coverage_quality.png  used on input line
- 419.
-(pdftex.def)             Requested size: 252.0pt x 157.22974pt.
-<figures/step8_coverage_metrics.png, id=36, 605.1408pt x 476.5002pt>
+Package pdftex.def Info: figures/step8_coverage_quality.png  used on input line 434.
+(pdftex.def)             Requested size: 252.0pt x 157.47328pt.
+<figures/step8_coverage_metrics.png, id=37, 604.1772pt x 475.5366pt>
 File: figures/step8_coverage_metrics.png Graphic file (type png)
 <use figures/step8_coverage_metrics.png>
-Package pdftex.def Info: figures/step8_coverage_metrics.png  used on input line
- 427.
-(pdftex.def)             Requested size: 252.0pt x 198.43462pt.
- [5 <./figures/step8_plume_agents_tracking.png (PNG copy)> <./figures/step8_vor
-onoi_3d.png (PNG copy)> <./figures/step8_coverage_quality.png (PNG copy)> <./fi
-gures/step8_coverage_metrics.png (PNG copy)>]
-<figures/step8_control_input.png, id=40, 594.0594pt x 415.3116pt>
+Package pdftex.def Info: figures/step8_coverage_metrics.png  used on input line 442.
+(pdftex.def)             Requested size: 252.0pt x 198.34535pt.
+[5 <./figures/step8_plume_agents_tracking.png (PNG copy)> <./figures/step8_voronoi_3d.png (PNG copy)> <./figures/step8_coverage_regions_3d.png (PNG copy)> <./figures/step8_coverage_quality.png (PNG copy)> <./figures/step8_coverage_metrics.png (PNG copy)>]
+<figures/step8_control_input.png, id=41, 593.0958pt x 414.348pt>
 File: figures/step8_control_input.png Graphic file (type png)
 <use figures/step8_control_input.png>
-Package pdftex.def Info: figures/step8_control_input.png  used on input line 45
-5.
-(pdftex.def)             Requested size: 252.0pt x 176.1724pt.
+Package pdftex.def Info: figures/step8_control_input.png  used on input line 470.
+(pdftex.def)             Requested size: 252.0pt x 176.04814pt.
 
 
 ** Conference Paper **
@@ -404,29 +369,17 @@ L3 programming layer <2026-03-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4414 strings out of 467690
- 67891 string characters out of 5431801
- 502798 words of memory out of 5000000
- 33427 multiletter control sequences out of 15000+600000
+ 4422 strings out of 467690
+ 68220 string characters out of 5431801
+ 499820 words of memory out of 5000000
+ 33435 multiletter control sequences out of 15000+600000
  668509 words of font info for 118 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,11n,65p,1908b,409s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<D:/Miktex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Miktex/fonts/type1/p
-ublic/amsfonts/cm/cmex10.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Miktex/fonts/type1/p
-ublic/amsfonts/cm/cmmi7.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb
-><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Miktex/fonts/type1/pub
-lic/amsfonts/cm/cmr5.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:
-/Miktex/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Miktex/fonts/type1/public/a
-msfonts/cm/cmr8.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Mi
-ktex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Miktex/fonts/type1/public/ams
-fonts/cm/cmsy8.pfb><D:/Miktex/fonts/type1/public/amsfonts/symbols/msbm10.pfb><D
-:/Miktex/fonts/type1/urw/times/utmb8a.pfb><D:/Miktex/fonts/type1/urw/times/utmb
-i8a.pfb><D:/Miktex/fonts/type1/urw/times/utmr8a.pfb><D:/Miktex/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on main_en.pdf (6 pages, 1055631 bytes).
+ 57i,11n,65p,953b,409s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<D:/Miktex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi5.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmmi8.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr5.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr6.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr7.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><D:/Miktex/fonts/type1/public/amsfonts/cm/cmsy8.pfb><D:/Miktex/fonts/type1/public/amsfonts/symbols/msbm10.pfb><D:/Miktex/fonts/type1/urw/times/utmb8a.pfb><D:/Miktex/fonts/type1/urw/times/utmbi8a.pfb><D:/Miktex/fonts/type1/urw/times/utmr8a.pfb><D:/Miktex/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main_en.pdf (6 pages, 1378293 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

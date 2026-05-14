@@ -19,11 +19,18 @@
 \IEEEauthorblockA{\textit{Affiliation}\\
 City, Country\\
 email@example.com}}
-
+% \author{\IEEEauthorblockN{Xiaofeng Zong}
+% \IEEEauthorblockA{\textit{Affiliation}\\
+% City, Country\\
+% email@example.com}}
+% \author{\IEEEauthorblockN{Haochao Lin}
+% \IEEEauthorblockA{\textit{Affiliation}\\
+% City, Country\\
+% email@example.com}}
 \maketitle
 
 \begin{abstract}
-Underwater oil spills caused by continuous leakage form pollution plumes with three-dimensional spatial diffusion, highly nonuniform concentration distributions, and dynamically expanding boundaries. Under limited sensing ranges, conventional density-weighted centroidal coverage methods for multiple autonomous underwater vehicles may suffer from cluster collapse, where all vehicles move toward the concentration peak and lose monitoring capability over the outer plume boundary. To address this problem, this paper proposes a multi-AUV cooperative monitoring method that integrates three-dimensional Voronoi adaptive coverage with dynamic boundary tracking, referred to as CVT-DBT. First, a continuous-release three-dimensional Gaussian plume model is established by considering ocean current transport, anisotropic turbulent diffusion, buoyancy-driven rise, and natural decay. A temporal convolution integral is used to represent the cumulative contribution of historically released oil parcels. Second, the concentration field is mapped to a time-varying coverage density function, and a volume-based Voronoi partition is constructed in a bounded three-dimensional underwater domain. Furthermore, a control law consisting of centroid feedback, centroid-velocity feedforward, boundary tracking, and dispersion terms is designed based on dynamic boundary sampling and spatially balanced assignment. Simulation results show that the standard CVT method suffers from severe cluster collapse, with a final dynamic coverage ratio of 38.24\% and a boundary tracking RMSE of 66.75 m. In contrast, the proposed CVT-DBT method improves the dynamic coverage ratio to 58.86\% and reduces the boundary tracking RMSE to 15.94 m while satisfying the AUV velocity constraint. The results demonstrate the effectiveness of the proposed method for three-dimensional dynamic underwater oil spill monitoring.
+Underwater oil leakage creates time-varying three-dimensional plumes that challenge multi-AUV monitoring under limited sensing ranges. Standard density-weighted CVT can cause cluster collapse, drawing vehicles toward the concentration peak and weakening boundary coverage. This paper proposes CVT-DBT, combining three-dimensional Voronoi adaptive coverage with dynamic boundary tracking. The method uses a continuous-release plume model, volume-based Voronoi partitioning, and a velocity-constrained controller with centroid feedback, feedforward, boundary tracking, and dispersion. Simulations improve final coverage from 38.24\% to 58.86\% and reduce boundary RMSE from 66.75 m to 15.94 m, while satisfying AUV speed limits.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -31,31 +38,31 @@ Underwater oil spill monitoring, multi-AUV cooperation, three-dimensional Vorono
 \end{IEEEkeywords}
 
 \section{Introduction}
-Underwater oil spills are critical threats to marine environmental safety and offshore engineering operations. Unlike surface spills, underwater leakage forms time-varying three-dimensional pollution plumes under the combined effects of ocean current transport, turbulent diffusion, buoyancy-driven rise, and natural decay. The migration and diffusion of underwater oil spills are strongly affected by the leaking rate and ocean current velocity \cite{zhang2020oil}, and practical oil spill modeling needs to account for transport, diffusion, decay, and boundary effects \cite{fingas2022overview}.
+Underwater oil spills pose major risks to marine environmental safety and offshore engineering operations. Unlike surface spills, underwater leakage forms time-varying three-dimensional pollution plumes under ocean-current transport, turbulent diffusion, buoyancy-driven rise, and natural decay. The migration and diffusion of underwater oil spills are strongly affected by leakage rate and ocean-current velocity \cite{zhang2020oil}. Practical oil spill models must therefore account for transport, diffusion, decay, and boundary effects \cite{fingas2022overview}.
 
-Autonomous underwater vehicles (AUVs) are suitable for underwater pollution monitoring due to their autonomous mobility, three-dimensional maneuverability, and close-range sensing capability. A key challenge in multi-AUV monitoring is to dynamically adjust the spatial distribution of vehicles according to the evolving pollution field, such that both high-concentration regions and the outer plume boundary can be monitored. Classical coverage control is typically formulated using Voronoi partitions and locational cost functions \cite{cortes2004coverage}, while Lloyd-type iterations and centroid feedback provide numerical mechanisms for approaching centroidal Voronoi configurations \cite{du2006lloyd}.
+Autonomous underwater vehicles (AUVs) are well suited to underwater pollution monitoring because they provide autonomous mobility, three-dimensional maneuverability, and close-range sensing. A key challenge in multi-AUV monitoring is to adjust vehicle distributions as the pollution field evolves. Effective monitoring must cover both high-concentration regions and the outer plume boundary. Classical coverage control is usually formulated with Voronoi partitions and locational cost functions \cite{cortes2004coverage}. Lloyd-type iterations and centroid feedback then provide numerical mechanisms for approaching centroidal Voronoi configurations \cite{du2006lloyd}.
 
-However, standard centroidal Voronoi tessellation (CVT) methods are insufficient for underwater oil spill monitoring. Since the concentration peak is usually located near the leakage source, pure density-weighted centroid feedback tends to attract all AUVs toward the high-concentration core. Although this behavior may reduce the locational cost, it sacrifices the monitoring capability over the expanding outer boundary. This paper refers to this behavior as cluster collapse.
+However, standard centroidal Voronoi tessellation (CVT) methods are not sufficient for underwater oil spill monitoring. Because the concentration peak is usually near the leakage source, pure density-weighted centroid feedback attracts AUVs toward the high-concentration core. This behavior can reduce the locational cost, but it weakens monitoring of the expanding outer boundary. In this paper, this behavior is referred to as cluster collapse.
 
-To overcome this limitation, this paper proposes a three-dimensional Voronoi adaptive coverage and dynamic boundary tracking method for multi-AUV underwater oil spill monitoring. The main contributions are summarized as follows:
+To address this limitation, this paper proposes a three-dimensional Voronoi adaptive coverage and dynamic boundary tracking method for multi-AUV underwater oil spill monitoring. The main contributions are as follows:
 \begin{itemize}
-\item A continuous-release three-dimensional advection--diffusion--decay plume model is developed using temporal convolution of historically released oil parcels.
-\item A volume-based three-dimensional Voronoi coverage model is formulated, where AUVs move inside the underwater domain rather than on a two-dimensional surface.
-\item A dynamic boundary sampling and spatially balanced assignment mechanism is introduced, leading to a CVT-DBT control law with centroid feedback, feedforward compensation, boundary tracking, and dispersion terms.
-\item Comparative simulations against standard CVT and three-dimensional lawnmower coverage demonstrate the advantages of the proposed method in dynamic coverage ratio, boundary tracking RMSE, and velocity-constrained feasibility.
+\item A continuous-release three-dimensional advection--diffusion--decay plume model is developed through temporal convolution of historically released oil parcels.
+\item A volume-based three-dimensional Voronoi coverage model is formulated, in which AUVs move within the underwater domain rather than on a two-dimensional surface.
+\item A dynamic boundary sampling and spatially balanced assignment mechanism is introduced, yielding a CVT-DBT control law with centroid feedback, feedforward compensation, boundary tracking, and dispersion terms.
+\item Comparative simulations with standard CVT and three-dimensional lawnmower coverage show the advantages of the proposed method in dynamic coverage ratio, boundary tracking RMSE, and velocity-constrained feasibility.
 \end{itemize}
 
 \section{Related Work}
 \subsection{Multi-Agent Voronoi Coverage Control}
-Multi-agent coverage control aims to coordinate multiple mobile sensors or robots to achieve effective monitoring over a target domain. Cortes et al. established a fundamental coverage control framework based on Voronoi partitions and locational cost functions \cite{cortes2004coverage}. In this framework, each agent is responsible for the region closest to itself and moves toward the density-weighted centroid of its Voronoi cell.
+Multi-agent coverage control coordinates multiple mobile sensors or robots to monitor a target domain effectively. Cortes et al. established a fundamental coverage control framework based on Voronoi partitions and locational cost functions \cite{cortes2004coverage}. In this framework, each agent is assigned the region closest to itself and moves toward the density-weighted centroid of its Voronoi cell.
 
-Centroidal Voronoi tessellation and Lloyd algorithms provide important computational foundations for coverage control. Du et al. studied the convergence of Lloyd algorithms for computing centroidal Voronoi tessellations \cite{du2006lloyd}. Nevertheless, conventional CVT methods are mainly designed for static or slowly varying density fields. When the density field is highly nonuniform, agents tend to concentrate around high-density regions, which may lead to insufficient boundary monitoring in oil spill scenarios.
+Centroidal Voronoi tessellation and Lloyd algorithms provide important computational foundations for coverage control. Du et al. studied the convergence of Lloyd algorithms for computing centroidal Voronoi tessellations \cite{du2006lloyd}. However, conventional CVT methods are mainly designed for static or slowly varying density fields. When the density field is highly nonuniform, agents tend to concentrate around high-density regions. This behavior can cause insufficient boundary monitoring in oil spill scenarios.
 
 \subsection{Time-Varying Density Coverage Control}
-In practical environmental monitoring tasks, the density function is often time-varying. Pierson et al. studied generalized coverage control for time-varying density functions \cite{pierson2019generalized}. These studies indicate that pure feedback to the instantaneous centroid may be insufficient in dynamic environments, and feedforward or prediction mechanisms can improve tracking performance. In contrast to general time-varying coverage, underwater oil spill monitoring requires not only coverage of high-concentration regions but also persistent tracking of the expanding outer boundary.
+In practical environmental monitoring, the density function is often time varying. Pierson et al. studied generalized coverage control for time-varying density functions \cite{pierson2019generalized}. These studies indicate that pure feedback to the instantaneous centroid may be insufficient in dynamic environments. Feedforward or prediction mechanisms can improve tracking performance. Unlike general time-varying coverage, underwater oil spill monitoring requires both coverage of high-concentration regions and persistent tracking of the expanding outer boundary.
 
 \subsection{Underwater Oil Spill Modeling}
-Underwater oil spill migration and diffusion are affected by leakage rate, ocean current velocity, turbulent diffusion, buoyancy, and natural decay. Previous studies have analyzed the influence of oil leaking rate and ocean current velocity on underwater spill migration \cite{zhang2020oil}. Fingas provided an overview of oil spill modeling and simulation for both surface and subsurface applications \cite{fingas2022overview}. Motivated by these physical insights, this paper develops a continuous-release three-dimensional plume model and integrates it with multi-AUV coverage control.
+Underwater oil spill migration and diffusion are affected by leakage rate, ocean-current velocity, turbulent diffusion, buoyancy, and natural decay. Previous studies have analyzed how leakage rate and ocean-current velocity affect underwater spill migration \cite{zhang2020oil}. Fingas reviewed oil spill modeling and simulation for both surface and subsurface applications \cite{fingas2022overview}. Motivated by these physical insights, this paper develops a continuous-release three-dimensional plume model and couples it with multi-AUV coverage control.
 
 \section{Problem Formulation}
 Let the three-dimensional monitoring domain be
@@ -82,7 +89,7 @@ V_i(t)=\{q\in\Omega\mid \|q-p_i(t)\|\leq \|q-p_j(t)\|,\forall j\neq i\}.
 \end{equation}
 Thus, $V_i(t)$ is a volume region rather than a two-dimensional plane or surface.
 
-This partition follows directly from the locational coverage objective. For any spatial point $q\in\Omega$, the local sensing cost contributed by the $i$-th AUV is proportional to $\|q-p_i(t)\|^2$. Assigning $q$ to the nearest AUV minimizes this local term pointwise, which yields the nearest-neighbor partition above in the three-dimensional Euclidean domain. Therefore, the global coverage cost can be decomposed over the three-dimensional Voronoi volume cells instead of over a planar projection or plume surface.
+This partition follows directly from the locational coverage objective. For any spatial point $q\in\Omega$, the local sensing cost contributed by the $i$-th AUV is proportional to $\|q-p_i(t)\|^2$. Assigning $q$ to the nearest AUV minimizes this local term pointwise. This yields the nearest-neighbor partition in the three-dimensional Euclidean domain. Therefore, the global coverage cost can be decomposed over three-dimensional Voronoi volume cells rather than over a planar projection or plume surface.
 
 Let $C(q,t)$ denote the oil concentration field. The coverage density function is defined as
 \begin{equation}
@@ -118,7 +125,7 @@ For fixed Voronoi cells and a frozen density field, differentiating the $i$-th c
 \phi(q,t)\|q-p_i(t)\|^2dq
 =2M_i(t)(p_i(t)-c_i(t)).
 \end{equation}
-Hence the stationary condition is $p_i(t)=c_i(t)$, which motivates the centroid-seeking update used in CVT-based coverage control.
+Hence, the stationary condition is $p_i(t)=c_i(t)$, which motivates the centroid-seeking update used in CVT-based coverage control.
 
 \section{Continuous-Release Three-Dimensional Oil Plume Model}
 Let the leakage source be located at $q_s=[x_s,y_s,z_s]^T$, where $z_s<0$. The concentration field $C(q,t)$ satisfies the three-dimensional advection--diffusion--decay equation:
@@ -136,7 +143,7 @@ D_x\frac{\partial^2 C}{\partial x^2}
 \end{aligned}
 \end{equation}
 
-A continuous leakage process is represented as the temporal convolution of historically released oil parcels. Let $\tau$ be the release time and
+A continuous leakage process is represented as a temporal convolution of historically released oil parcels. Let $\tau$ be the release time and
 \begin{equation}
 a=t-\tau
 \end{equation}
@@ -148,7 +155,7 @@ The diffusion scales are
 \begin{equation}
 \sigma_k(a)=\sqrt{\sigma_{k0}^2+2D_ka},\quad k\in\{x,y,z\}.
 \end{equation}
-The nonzero initial diffusion scale $\sigma_{k0}>0$ regularizes the point-source model and avoids concentration singularity.
+The nonzero initial diffusion scale $\sigma_{k0}>0$ regularizes the point-source model and avoids a concentration singularity.
 
 The concentration field is approximated by
 \begin{equation}
@@ -172,7 +179,7 @@ where
 \exp\left[-\frac{(z+z_c(a))^2}{2\sigma_z^2(a)}\right].
 \end{aligned}
 \end{equation}
-The second term is an image term with respect to the sea surface and approximately satisfies the zero-flux boundary condition at $z=0$. The seabed reflection is neglected by assuming that the source is sufficiently above the seabed and the main plume body does not reach the seabed within the considered monitoring window.
+The second term is an image term with respect to the sea surface. It approximately satisfies the zero-flux boundary condition at $z=0$. Seabed reflection is neglected by assuming that the source is sufficiently above the seabed and that the main plume body does not reach the seabed during the monitoring window.
 
 If AUV monitoring starts after a pre-leakage duration $t_0$, the physical time used in the plume model is
 \begin{equation}
@@ -187,7 +194,7 @@ The dynamic plume boundary is defined as the concentration isosurface
 \end{equation}
 
 \section{Three-Dimensional Voronoi Adaptive Coverage and Dynamic Boundary Tracking}
-At each time instant, the three-dimensional Voronoi partition and density-weighted centroids are computed from the current concentration field. To prevent cluster collapse, the proposed method further samples and assigns the dynamic plume boundary in three-dimensional space.
+At each time instant, the three-dimensional Voronoi partition and density-weighted centroids are computed from the current concentration field. To prevent cluster collapse, the proposed method also samples and assigns the dynamic plume boundary in three-dimensional space.
 
 Let the sampled boundary point set be
 \begin{equation}
@@ -202,7 +209,7 @@ and the corresponding unit direction
 s_l(t)=\frac{r_l(t)}{\|r_l(t)\|}.
 \end{equation}
 
-The boundary surface is approximately partitioned according to balanced three-dimensional solid-angle sectors. The boundary subset assigned to the $i$-th AUV satisfies
+The boundary surface is approximately partitioned into balanced three-dimensional solid-angle sectors. The boundary subset assigned to the $i$-th AUV satisfies
 \begin{equation}
 \mathcal{B}_i(t)\subset\mathcal{B}(t),\quad
 \bigcup_{i=1}^{n}\mathcal{B}_i(t)=\mathcal{B}(t),\quad
@@ -261,7 +268,7 @@ The position update is
 p_i(t+\Delta t)=p_i(t)+v_i(t)\Delta t.
 \end{equation}
 
-Algorithm \ref{alg:cvt_dbt} summarizes one discrete CVT-DBT iteration used in the simulations. The three-dimensional Voronoi integrals are approximated by mixed uniform and plume-biased importance samples, and each sample is assigned to its nearest AUV. This implementation is consistent with the volume Voronoi definition while avoiding explicit construction of clipped three-dimensional Voronoi polyhedra.
+Algorithm \ref{alg:cvt_dbt} summarizes one discrete CVT-DBT iteration used in the simulations. The three-dimensional Voronoi integrals are approximated by mixed uniform and plume-biased importance samples. Each sample is assigned to its nearest AUV. This implementation is consistent with the volume Voronoi definition while avoiding explicit construction of clipped three-dimensional Voronoi polyhedra.
 
 \begin{algorithm}[t]
 \caption{CVT-DBT Iteration for Dynamic Underwater Oil Plume Monitoring}
@@ -287,10 +294,10 @@ Algorithm \ref{alg:cvt_dbt} summarizes one discrete CVT-DBT iteration used in th
 \end{algorithmic}
 \end{algorithm}
 
-Let $N_s$ be the number of centroid samples, $N_b$ the number of boundary samples, $n$ the number of AUVs, and $L$ the number of temporal convolution substeps for plume evaluation. The dominant per-step cost is approximately $O(N_s n+N_sL+N_bL+n^2)$, where the four terms correspond to nearest-agent assignment, density evaluation at centroid samples, boundary concentration evaluation, and pairwise dispersion, respectively. In the considered experiments, $n=8$, so the main computational burden comes from sampling-based density and boundary evaluation.
+Let $N_s$ be the number of centroid samples, $N_b$ the number of boundary samples, $n$ the number of AUVs, and $L$ the number of temporal convolution substeps for plume evaluation. The dominant per-step cost is approximately $O(N_s n+N_sL+N_bL+n^2)$. The four terms correspond to nearest-agent assignment, density evaluation at centroid samples, boundary concentration evaluation, and pairwise dispersion, respectively. In the considered experiments, $n=8$, so the main computational burden comes from sampling-based density and boundary evaluation.
 
 \subsection{Theoretical Property and Stability Discussion}
-For a static density field, or within a single control step where $\phi(q,t)$ is treated as frozen, the standard CVT centroid feedback admits a Lyapunov-like descent property. Consider the frozen locational cost
+For a static density field, or within a single control step where $\phi(q,t)$ is treated as frozen, standard CVT centroid feedback has a Lyapunov-like descent property. Consider the frozen locational cost
 \begin{equation}
 \mathcal{H}(P)=
 \sum_{i=1}^{n}
@@ -320,9 +327,9 @@ the derivative of $\mathcal{H}$ along the closed-loop trajectory satisfies
 &=-2k_c\sum_{i=1}^{n}M_i\|p_i-c_i\|^2\leq0.
 \end{aligned}
 \end{equation}
-Therefore, in the fixed-density case, the locational cost is nonincreasing. By LaSalle's invariance principle, the standard CVT dynamics converge to the invariant set satisfying $p_i=c_i$, which corresponds to a local centroidal Voronoi configuration.
+Therefore, in the fixed-density case, the locational cost is nonincreasing. By LaSalle's invariance principle, the standard CVT dynamics converge to the invariant set satisfying $p_i=c_i$. This set corresponds to a local centroidal Voronoi configuration.
 
-The proposed CVT-DBT law is not a pure gradient descent of $\mathcal{H}(P,t)$. The centroid feedback term inherits the local descent tendency above, whereas the centroid-velocity feedforward, boundary tracking, dispersion, and velocity saturation terms are introduced for dynamic plume monitoring and actuator feasibility. Consequently, the complete time-varying CVT-DBT system should not be claimed to be globally asymptotically convergent to the minimizer of $\mathcal{H}(P,t)$. Instead, it deliberately trades part of the locational-cost optimality for boundary tracking accuracy, which is consistent with the simulation results: standard CVT attains a lower final $\mathcal{H}$ but suffers from cluster collapse, while CVT-DBT achieves a higher dynamic coverage ratio and a much smaller boundary RMSE.
+The proposed CVT-DBT law is not a pure gradient descent of $\mathcal{H}(P,t)$. The centroid feedback term inherits the local descent tendency described above. The centroid-velocity feedforward, boundary tracking, dispersion, and velocity saturation terms are introduced for dynamic plume monitoring and actuator feasibility. Therefore, the complete time-varying CVT-DBT system should not be claimed to converge globally and asymptotically to the minimizer of $\mathcal{H}(P,t)$. Instead, it deliberately trades part of locational-cost optimality for boundary tracking accuracy. This tradeoff is consistent with the simulation results: standard CVT attains a lower final $\mathcal{H}$ but suffers from cluster collapse, whereas CVT-DBT achieves a higher dynamic coverage ratio and a much smaller boundary RMSE.
 
 \section{Simulation Results and Analysis}
 \subsection{Simulation Setup}
@@ -362,7 +369,7 @@ Three methods are compared: Proposed CVT-DBT, Standard CVT, and Lawnmower CPP. T
 \begin{equation}
 v_i(t)=k_c(c_i(t)-p_i(t)).
 \end{equation}
-The lawnmower method follows a preplanned three-dimensional scanning path without adapting to the real-time plume state.
+The lawnmower method follows a preplanned three-dimensional scanning path and does not adapt to the real-time plume state.
 
 \subsection{Evaluation Metrics}
 The coverage quality is
@@ -397,7 +404,7 @@ v_i^{\mathrm{speed}}(t)=
 \end{equation}
 
 \subsection{Results}
-Fig. \ref{fig:plume} shows the three-dimensional plume isosurfaces and AUV trajectories. The proposed method distributes AUVs between the high-concentration core and the outer boundary, forming a spatial envelope around the plume.
+Fig. \ref{fig:plume} shows the three-dimensional plume isosurfaces and AUV trajectories. The proposed method distributes AUVs between the high-concentration core and the outer boundary. As a result, the vehicles form a spatial envelope around the plume.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{figures/step8_plume_agents_tracking.png}}
@@ -405,7 +412,7 @@ Fig. \ref{fig:plume} shows the three-dimensional plume isosurfaces and AUV traje
 \label{fig:plume}
 \end{figure}
 
-Fig. \ref{fig:voronoi} shows the three-dimensional Voronoi regions, confirming that the responsibility domains are volume regions rather than two-dimensional surfaces.
+Fig. \ref{fig:voronoi} shows the three-dimensional Voronoi regions. The result confirms that the responsibility domains are volume regions rather than two-dimensional surfaces.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{figures/step8_voronoi_3d.png}}
@@ -413,7 +420,15 @@ Fig. \ref{fig:voronoi} shows the three-dimensional Voronoi regions, confirming t
 \label{fig:voronoi}
 \end{figure}
 
-Fig. \ref{fig:H} compares the coverage quality. The standard CVT achieves a lower final coverage cost because the AUVs collapse toward the high-concentration core, but this behavior sacrifices boundary monitoring.
+A Voronoi responsibility region specifies which AUV is responsible for a spatial location. It is not equivalent to the plume volume actually sensed within the finite sonar radius. To link the metric definition with visual evidence, Fig. \ref{fig:coverage_regions} shows the actual sensing coverage at the final time. The translucent spheres denote sensing ranges with $R_s=50$ m. Green samples denote plume volume covered by at least one AUV, and gray samples denote uncovered plume volume. This figure directly corresponds to the definition of $CR(T)$. The dynamic coverage ratio measures the fraction of plume volume within at least one AUV sensing radius, not the fraction assigned by Voronoi responsibility regions.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\linewidth]{figures/step8_coverage_regions_3d.png}}
+\caption{Actual sensing coverage region at the final time.}
+\label{fig:coverage_regions}
+\end{figure}
+
+Fig. \ref{fig:H} compares the coverage quality. Standard CVT achieves a lower final coverage cost because the AUVs collapse toward the high-concentration core. However, this behavior sacrifices boundary monitoring.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{figures/step8_coverage_quality.png}}
@@ -447,9 +462,9 @@ Lawnmower CPP & $3.606\times10^{10}$ & 28.20\% & 54.10 m\\
 \end{center}
 \end{table}
 
-Compared with standard CVT, the proposed method reduces the boundary RMSE from 66.75 m to 15.94 m, corresponding to a reduction of approximately 76.1\%. Meanwhile, the dynamic coverage ratio increases from 38.24\% to 58.86\%. These results indicate that dynamic boundary tracking and spatially balanced assignment effectively mitigate cluster collapse.
+Compared with standard CVT, the proposed method reduces the boundary RMSE from 66.75 m to 15.94 m. This corresponds to an approximately 76.1\% reduction and a 4.2-fold improvement in boundary tracking accuracy. The dynamic coverage ratio also increases from 38.24\% to 58.86\%, and the mean ratio over the last 20 steps reaches 60.88\%. Together with Fig. \ref{fig:coverage_regions}, these results show that CVT-DBT does not merely improve $CR(T)$ numerically. Under the finite sensing radius constraint, it distributes AUVs between the plume core and the spreading boundary. The actually sensed volume therefore forms a continuous three-dimensional monitoring envelope. Dynamic boundary tracking and spatially balanced assignment effectively mitigate cluster collapse.
 
-Fig. \ref{fig:control} shows the AUV speed curves. The speeds of all AUVs remain within the maximum velocity constraint of 3.5 m/s, and the curves are smooth without high-frequency oscillations.
+Fig. \ref{fig:control} shows the AUV speed curves. All AUV speeds are limited by the saturation constraint $v_{\max}=3.5$ m/s. The maximum recorded speed is 3.50 m/s, and the average speed is approximately 3.47 m/s. The smooth curves indicate that the control inputs are practically feasible.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=\linewidth]{figures/step8_control_input.png}}
@@ -458,9 +473,9 @@ Fig. \ref{fig:control} shows the AUV speed curves. The speeds of all AUVs remain
 \end{figure}
 
 \section{Conclusion}
-This paper proposed a multi-AUV cooperative monitoring method that integrates three-dimensional Voronoi adaptive coverage with dynamic boundary tracking for underwater continuous oil spill monitoring. A continuous-release three-dimensional plume model was developed by considering ocean current transport, anisotropic diffusion, buoyancy-driven rise, and natural decay. A volume-based Voronoi partition and density-weighted centroid were then constructed to guide AUVs toward high-risk regions. To address cluster collapse, dynamic boundary sampling and spatially balanced assignment were introduced, leading to a velocity-constrained control law with centroid feedback, centroid-velocity feedforward, boundary tracking, and dispersion terms.
+This paper proposed a multi-AUV cooperative monitoring method that integrates three-dimensional Voronoi adaptive coverage with dynamic boundary tracking for continuous underwater oil spill monitoring. A continuous-release three-dimensional plume model was developed by considering ocean-current transport, anisotropic diffusion, buoyancy-driven rise, and natural decay. A volume-based Voronoi partition and density-weighted centroid were then constructed to guide AUVs toward high-risk regions. To address cluster collapse, dynamic boundary sampling and spatially balanced assignment were introduced. These components yield a velocity-constrained control law with centroid feedback, centroid-velocity feedforward, boundary tracking, and dispersion terms.
 
-Simulation results showed that standard CVT achieved a lower locational cost but suffered from cluster collapse, resulting in a final dynamic coverage ratio of 38.24\% and a boundary RMSE of 66.75 m. In contrast, the proposed CVT-DBT method improved the dynamic coverage ratio to 58.86\% and reduced the boundary RMSE to 15.94 m while satisfying the AUV velocity constraint. Future work will consider collision avoidance, communication constraints, complex seabed geometry, and control barrier function based safety filtering.
+Simulation results show that standard CVT achieves a lower locational cost but suffers from cluster collapse. Its final dynamic coverage ratio is 38.24\%, and its boundary RMSE is 66.75 m. In contrast, the proposed CVT-DBT method increases the dynamic coverage ratio to 58.86\%, reaches a last-20-step mean coverage ratio of 60.88\%, and reduces the boundary RMSE to 15.94 m while satisfying the AUV velocity constraint. The actual sensing coverage visualization further confirms that the reported dynamic coverage comes from plume volume covered within finite sonar ranges. It is not obtained by treating Voronoi responsibility regions as monitored regions. This closes the logical chain from plume model and control law to evaluation metrics and visual validation. Future work will consider collision avoidance, communication constraints, complex seabed geometry, and control-barrier-function-based safety filtering.
 
 \begin{thebibliography}{00}
 
