@@ -17,15 +17,16 @@ function [boundary_points, assigned_agent, boundary_distance] = sample_plume_bou
     tau = max(t, 0);
     n_agents = size(agent_positions, 1);
 
-    center_x = src(1) + 0.55 * params.plume.u_current * tau;
-    sx = min(max(params.plume.sigma_x0 + sqrt(2 * params.plume.diffusion_x * tau) + 170, 140), 320);
-    sy = min(max(params.plume.sigma_y0 + sqrt(2 * params.plume.diffusion_y * tau) + 130, 110), 240);
-    sz = min(max(params.plume.sigma_z0 + sqrt(2 * params.plume.diffusion_z * tau) + 90, 75), 180);
+    center_x = src(1) + params.plume.u_current * tau;
+    center_z = min(0, src(3) + params.plume.w_buoyancy * tau);
+    sx = min(max(sqrt(params.plume.sigma_x0^2 + 2 * params.plume.diffusion_x * tau) + 170, 140), 320);
+    sy = min(max(sqrt(params.plume.sigma_y0^2 + 2 * params.plume.diffusion_y * tau) + 130, 110), 240);
+    sz = min(max(sqrt(params.plume.sigma_z0^2 + 2 * params.plume.diffusion_z * tau) + 90, 75), 180);
 
     samples = zeros(N, 3);
     samples(:,1) = center_x + sx * randn(N, 1);
     samples(:,2) = src(2) + sy * randn(N, 1);
-    samples(:,3) = src(3) + sz * randn(N, 1);
+    samples(:,3) = center_z + sz * randn(N, 1);
     samples(:,1) = max(domain.xmin, min(domain.xmax, samples(:,1)));
     samples(:,2) = max(domain.ymin, min(domain.ymax, samples(:,2)));
     samples(:,3) = max(domain.zmin, min(domain.zmax, samples(:,3)));
@@ -50,16 +51,21 @@ function [boundary_points, assigned_agent, boundary_distance] = sample_plume_bou
         return;
     end
 
+    plume_center = [center_x, src(2), center_z];
+    rel_agents = agent_positions - plume_center;
+    agent_theta = atan2(rel_agents(:,3) ./ max(sz, eps), rel_agents(:,2) ./ max(sy, eps));
+    [~, agent_order] = sort(agent_theta, 'ascend');
+
     rel_y = (boundary_points(:,2) - src(2)) ./ max(sy, eps);
-    rel_z = (boundary_points(:,3) - src(3)) ./ max(sz, eps);
+    rel_z = (boundary_points(:,3) - center_z) ./ max(sz, eps);
     theta = atan2(rel_z, rel_y);
     [~, order_theta] = sort(theta, 'ascend');
 
     assigned_agent = zeros(size(boundary_points, 1), 1);
-    for i = 1:n_agents
-        idx_start = floor((i - 1) * numel(order_theta) / n_agents) + 1;
-        idx_end = floor(i * numel(order_theta) / n_agents);
-        assigned_agent(order_theta(idx_start:idx_end)) = i;
+    for rank = 1:n_agents
+        idx_start = floor((rank - 1) * numel(order_theta) / n_agents) + 1;
+        idx_end = floor(rank * numel(order_theta) / n_agents);
+        assigned_agent(order_theta(idx_start:idx_end)) = agent_order(rank);
     end
 
     dist_to_assigned = sqrt(sum((boundary_points - agent_positions(assigned_agent, :)).^2, 2));

@@ -30,16 +30,18 @@ function [centroids, samples, phi, dist_matrix, nearest_agent, g] = compute_cent
 
     src = params.plume.source_pos;
     tau = max(t, 0);
-    center_x = src(1) + 0.55 * params.plume.u_current * tau;
+    center_x = src(1) + params.plume.u_current * tau;
+    center_z = min(0, src(3) + params.plume.w_buoyancy * tau);
     mean_x = min(domain.xmax, max(domain.xmin, center_x));
-    sigma_x_sample = min(max(params.plume.sigma_x0 + sqrt(2 * params.plume.diffusion_x * tau) + 120, 100), 260);
-    sigma_y_sample = min(max(params.plume.sigma_y0 + sqrt(2 * params.plume.diffusion_y * tau) + 90, 80), 210);
-    sigma_z_sample = min(max(params.plume.sigma_z0 + sqrt(2 * params.plume.diffusion_z * tau) + 65, 55), 150);
+    mean_z = min(domain.zmax, max(domain.zmin, center_z));
+    sigma_x_sample = min(max(sqrt(params.plume.sigma_x0^2 + 2 * params.plume.diffusion_x * tau) + 120, 100), 260);
+    sigma_y_sample = min(max(sqrt(params.plume.sigma_y0^2 + 2 * params.plume.diffusion_y * tau) + 90, 80), 210);
+    sigma_z_sample = min(max(sqrt(params.plume.sigma_z0^2 + 2 * params.plume.diffusion_z * tau) + 65, 55), 150);
 
     samples_p = zeros(N_plume, 3);
     samples_p(:,1) = mean_x + sigma_x_sample * randn(N_plume, 1);
     samples_p(:,2) = src(2) + sigma_y_sample * randn(N_plume, 1);
-    samples_p(:,3) = src(3) + sigma_z_sample * randn(N_plume, 1);
+    samples_p(:,3) = mean_z + sigma_z_sample * randn(N_plume, 1);
 
     samples_p(:,1) = max(domain.xmin, min(domain.xmax, samples_p(:,1)));
     samples_p(:,2) = max(domain.ymin, min(domain.ymax, samples_p(:,2)));
@@ -53,7 +55,7 @@ function [centroids, samples, phi, dist_matrix, nearest_agent, g] = compute_cent
 
     g_x = normpdf(samples_p(:,1), mean_x, sigma_x_sample);
     g_y = normpdf(samples_p(:,2), src(2), sigma_y_sample);
-    g_z = normpdf(samples_p(:,3), src(3), sigma_z_sample);
+    g_z = normpdf(samples_p(:,3), mean_z, sigma_z_sample);
     g(N_uniform+1:end) = (1-p_uniform) * g_x .* g_y .* g_z;
     g = max(g, 1e-20);
 

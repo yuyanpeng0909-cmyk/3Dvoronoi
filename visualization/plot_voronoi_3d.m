@@ -25,7 +25,8 @@ function plot_voronoi_3d(agent_positions, t, params)
         end
     end
 
-    nx = 38; ny = 30; nz = 26;
+    % 加密网格以保证稀疏区域的等值面提取
+    nx = 45; ny = 36; nz = 32;
     x = linspace(domain.xmin, domain.xmax, nx);
     y = linspace(domain.ymin, domain.ymax, ny);
     z = linspace(domain.zmin, domain.zmax, nz);
@@ -48,11 +49,47 @@ function plot_voronoi_3d(agent_positions, t, params)
                  'LineWidth', 1.5, 'DisplayName', sprintf('AUV %d', i));
 
         region_volume = reshape(nearest == i, size(X)) & active_volume;
-        if nnz(region_volume) < 4
+        n_pts = nnz(region_volume);
+
+        if n_pts < 4
+            % 羽流交集极少：显示完整Voronoi单元（低透明度）
+            region_full = reshape(nearest == i, size(X));
+            if nnz(region_full) < 4, continue; end
+            [faces_i, verts_i] = isosurface(X, Y, Z, smooth3(double(region_full), 'box', 3), 0.28);
+            if ~isempty(faces_i)
+                patch('Faces', faces_i, 'Vertices', verts_i, ...
+                      'FaceAlpha', 0.10, 'FaceColor', colors(i,:), 'EdgeColor', 'none', ...
+                      'DisplayName', sprintf('AUV %d覆盖区域', i));
+            end
             continue;
         end
-        [faces_i, verts_i] = isosurface(X, Y, Z, smooth3(double(region_volume), 'box', 3), 0.28);
-        if ~isempty(faces_i)
+
+        % 根据点密度自适应调整平滑参数
+        density_ratio = n_pts / nnz(nearest == i);
+        if density_ratio < 0.05
+            kernel_size = 3;
+            iso_level = 0.15;
+        elseif density_ratio < 0.15
+            kernel_size = 3;
+            iso_level = 0.22;
+        else
+            kernel_size = 3;
+            iso_level = 0.28;
+        end
+
+        smoothed = smooth3(double(region_volume), 'box', kernel_size);
+        [faces_i, verts_i] = isosurface(X, Y, Z, smoothed, iso_level);
+
+        if isempty(faces_i)
+            % 等值面提取失败：降级为散点渲染
+            pts = grid_points(region_volume(:), :);
+            if size(pts, 1) > 200
+                idx = randperm(size(pts, 1), 200);
+                pts = pts(idx, :);
+            end
+            scatter3(pts(:,1), pts(:,2), pts(:,3), 15, colors(i,:), 'filled', ...
+                     'MarkerFaceAlpha', 0.25, 'DisplayName', sprintf('AUV %d覆盖区域', i));
+        else
             patch('Faces', faces_i, 'Vertices', verts_i, ...
                   'FaceAlpha', 0.22, 'FaceColor', colors(i,:), 'EdgeColor', 'none', ...
                   'DisplayName', sprintf('AUV %d覆盖区域', i));

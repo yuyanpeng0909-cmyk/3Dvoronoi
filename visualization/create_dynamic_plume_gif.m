@@ -8,6 +8,7 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
 
     steps = size(trajectory, 1);
     n_agents = size(trajectory, 2);
+    trajectory_vis = smooth_trajectory(trajectory);
     colors = lines(n_agents);
     frame_count = 36;
     frame_steps = unique(round(linspace(1, steps, frame_count)));
@@ -18,8 +19,9 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
 
     for k = 1:numel(frame_steps)
         step = frame_steps(k);
-        t = step * params.algorithm.dt;
-        plume_state = update_plume(t, params);
+        t_monitor = (step - 1) * params.algorithm.dt;
+        t_leak = params.sim.pre_release_time + t_monitor;
+        plume_state = update_plume(t_leak, params);
         C_max = max(plume_state.C(:));
 
         clf(fig);
@@ -66,12 +68,13 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
                  360, 'r', 'p', 'filled', 'MarkerEdgeColor', 'k', 'LineWidth', 1.5, ...
                  'DisplayName', '溢油源');
 
-        front_x = min(domain.xmax, params.plume.source_pos(1) + params.plume.front_initial_extent + params.plume.u_current * t);
-        plot3(ax, [front_x front_x], [domain.ymin domain.ymax], [params.plume.source_pos(3) params.plume.source_pos(3)], ...
+        front_x = min(domain.xmax, params.plume.source_pos(1) + params.plume.u_current * t_leak);
+        front_z = min(0, params.plume.source_pos(3) + params.plume.w_buoyancy * t_leak);
+        plot3(ax, [front_x front_x], [domain.ymin domain.ymax], [front_z front_z], ...
               'k--', 'LineWidth', 1.3, 'DisplayName', '扩散前沿');
 
         for i = 1:n_agents
-            traj_i = reshape(trajectory(1:step, i, :), step, 3);
+            traj_i = reshape(trajectory_vis(1:step, i, :), step, 3);
             if i <= 4
                 display_name = sprintf('AUV %d轨迹', i);
                 handle_visibility = 'on';
@@ -97,7 +100,7 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
         camlight(ax, 'headlight');
         lighting(ax, 'gouraud');
         xlabel(ax, 'X (m)'); ylabel(ax, 'Y (m)'); zlabel(ax, 'Z (m)');
-        title(ax, sprintf('动态溢油源扩散与AUV实时监测  t = %.0f s', t), 'FontSize', 14);
+        title(ax, sprintf('动态溢油源扩散与AUV实时监测  监测t = %.0f s，泄漏已持续 %.0f s', t_monitor, t_leak), 'FontSize', 14);
         legend(ax, 'Location', 'northeastoutside', 'FontSize', 7);
         set(ax, 'FontSize', 10);
         drawnow;

@@ -40,8 +40,9 @@ function [new_positions, centroids, move_distance, sample_data] = lloyd_iteratio
     end
     v_boundary = params.algorithm.boundary_gain * (boundary_targets - agent_positions);
 
-    plume_center = [params.plume.source_pos(1) + 0.55 * params.plume.u_current * max(t, 0), ...
-                    params.plume.source_pos(2), params.plume.source_pos(3)];
+    plume_center = [params.plume.source_pos(1) + params.plume.u_current * max(t, 0), ...
+                    params.plume.source_pos(2), ...
+                    min(0, params.plume.source_pos(3) + params.plume.w_buoyancy * max(t, 0))];
     rel = agent_positions - plume_center;
     desired_spacing = 0.75 * params.agent.sense_radius;
     v_separation = zeros(n, 3);

@@ -1,5 +1,5 @@
 function C = gaussian_plume_3d(x, y, z, t, params)
-% gaussian_plume_3d - 三维时变高斯溢油羽流浓度场计算
+% gaussian_plume_3d - 持续泄漏的三维对流-扩散-衰减羽流浓度场
 %
 % 输入:
 %   x, y, z: 标量或同维数组，空间坐标 (m)
@@ -12,45 +12,44 @@ function C = gaussian_plume_3d(x, y, z, t, params)
     src = params.plume.source_pos;
     Q = params.plume.Q;
     u = params.plume.u_current;
+    w = params.plume.w_buoyancy;
     sx0 = params.plume.sigma_x0;
     sy0 = params.plume.sigma_y0;
     sz0 = params.plume.sigma_z0;
-    kx = params.plume.kx;
-    ky = params.plume.ky;
-    kz = params.plume.kz;
     Dx = params.plume.diffusion_x;
     Dy = params.plume.diffusion_y;
     Dz = params.plume.diffusion_z;
     lambda = params.plume.decay_rate;
+    n_release = params.plume.release_substeps;
 
     tau = max(t, 0);
-    dx = x - src(1);
-    dy = y - src(2);
-    dz = z - src(3);
+    C = zeros(size(x));
+    if tau <= 0
+        return;
+    end
 
-    plume_front = src(1) + params.plume.front_initial_extent + u * tau;
-    front_gate = 1 ./ (1 + exp((x - plume_front) ./ params.plume.front_smoothing));
-    downstream_mask = dx >= 0;
+    release_times = linspace(0, tau, n_release + 1);
+    release_times = 0.5 * (release_times(1:end-1) + release_times(2:end));
+    dtau = tau / n_release;
 
-    sigma_x = sx0 + kx * max(dx, 0) + sqrt(2 * Dx * tau);
-    sigma_y = sy0 + ky * max(dx, 0) + sqrt(2 * Dy * tau);
-    sigma_z = sz0 + kz * max(dx, 0) + sqrt(2 * Dz * tau);
+    for r = release_times
+        age = tau - r;
+        center_x = src(1) + u * age;
+        center_y = src(2);
+        center_z = min(0, src(3) + w * age);
 
-    sigma_x = max(sigma_x, sx0);
-    sigma_y = max(sigma_y, sy0);
-    sigma_z = max(sigma_z, sz0);
+        sigma_x = sqrt(sx0^2 + 2 * Dx * age);
+        sigma_y = sqrt(sy0^2 + 2 * Dy * age);
+        sigma_z = sqrt(sz0^2 + 2 * Dz * age);
 
-    center_x = src(1) + 0.55 * u * tau;
-    axial = exp(-((x - center_x).^2) ./ (2 * sigma_x.^2));
-    lateral = exp(-(dy.^2) ./ (2 * sigma_y.^2));
-    direct = exp(-(dz.^2) ./ (2 * sigma_z.^2));
-    mirror = exp(-(z + src(3)).^2 ./ (2 * sigma_z.^2));
+        kernel = exp(-((x - center_x).^2) ./ (2 * sigma_x^2) ...
+                     -((y - center_y).^2) ./ (2 * sigma_y^2));
+        vertical = exp(-((z - center_z).^2) ./ (2 * sigma_z^2)) + ...
+                   exp(-((z + center_z).^2) ./ (2 * sigma_z^2));
+        downstream_gate = 1 ./ (1 + exp(-(x - src(1)) ./ params.plume.front_smoothing));
+        amplitude = Q * dtau * exp(-lambda * age) / ((2*pi)^(3/2) * sigma_x * sigma_y * sigma_z);
+        C = C + amplitude .* kernel .* vertical .* downstream_gate;
+    end
 
-    source_gate = 1 - exp(-tau / 8);
-    amplitude = Q .* source_gate .* exp(-lambda * tau) ./ ...
-        ((2*pi)^(3/2) .* sigma_x .* sigma_y .* sigma_z);
-
-    C = amplitude .* axial .* lateral .* (direct + mirror) .* front_gate;
-    C(~downstream_mask) = 0;
     C = max(C, 0);
 end

@@ -46,8 +46,9 @@ function plot_plume_agents_3d(positions, trajectory, plume_state, params)
 
     n_agents = size(trajectory, 2);
     colors = lines(n_agents);
+    trajectory_vis = smooth_trajectory(trajectory);
     for i = 1:n_agents
-        traj_i = squeeze(trajectory(:, i, :));
+        traj_i = squeeze(trajectory_vis(:, i, :));
         if size(traj_i, 2) == 3
             plot3(traj_i(:,1), traj_i(:,2), traj_i(:,3), '-', ...
                   'Color', colors(i,:), 'LineWidth', 2, ...
