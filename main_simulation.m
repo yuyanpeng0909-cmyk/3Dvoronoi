@@ -130,6 +130,9 @@ function main_simulation()
     plot_voronoi_3d(pos_proposed, t_final_leak, params);
     exportgraphics(gcf, fullfile(save_dir, 'step8_voronoi_3d.png'), 'Resolution', 150);
 
+    plot_coverage_regions_3d(pos_proposed, plume_state, params);
+    exportgraphics(gcf, fullfile(save_dir, 'step8_coverage_regions_3d.png'), 'Resolution', 150);
+
     plot_boundary_tracking(boundary_distances, plume_extent, ...
         boundary_rmse_proposed, boundary_rmse_cvt, boundary_rmse_lawnmower, params);
     exportgraphics(gcf, fullfile(save_dir, 'step8_boundary_tracking.png'), 'Resolution', 150);

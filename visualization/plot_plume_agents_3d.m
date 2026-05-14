@@ -7,7 +7,7 @@ function plot_plume_agents_3d(positions, trajectory, plume_state, params)
 %   plume_state: 羽流网格数据（来自 update_plume）
 %   params: 参数结构体
 
-    figure('Name', '自适应覆盖最终状态', 'Position', [100 100 1000 750]);
+    figure('Name', 'Adaptive Coverage Final State', 'Position', [100 100 1000 750]);
 
     C_max = max(plume_state.C(:));
     hold on;
@@ -18,7 +18,7 @@ function plot_plume_agents_3d(positions, trajectory, plume_state, params)
         if ~isempty(faces_o)
             patch('Faces', faces_o, 'Vertices', verts_o, ...
                   'FaceAlpha', 0.10, 'FaceColor', [1 0.6 0.2], 'EdgeColor', 'none', ...
-                  'DisplayName', sprintf('扩散边界(%.0f%%)', params.plume.boundary_threshold * 100));
+                  'DisplayName', sprintf('Outer plume boundary (%.0f%%)', params.plume.boundary_threshold * 100));
         end
 
         th_inner = C_max * 0.25;
@@ -26,7 +26,7 @@ function plot_plume_agents_3d(positions, trajectory, plume_state, params)
         if ~isempty(faces_i)
             patch('Faces', faces_i, 'Vertices', verts_i, ...
                   'FaceAlpha', 0.18, 'FaceColor', [1 0.35 0], 'EdgeColor', 'none', ...
-                  'DisplayName', '高浓度核心');
+                  'DisplayName', 'High-concentration core');
         end
 
         [~, yidx] = min(abs(plume_state.y));
@@ -39,7 +39,7 @@ function plot_plume_agents_3d(positions, trajectory, plume_state, params)
         if any(~isnan(C_slice_vis(:)))
             surf(X_slice, zeros(size(X_slice)), Z_slice, C_slice_vis, ...
                  'FaceAlpha', 0.45, 'EdgeColor', 'none', 'FaceColor', 'interp', ...
-                 'DisplayName', '纵切面浓度');
+                 'DisplayName', 'Concentration slice');
             colormap(parula);
         end
     end
@@ -52,31 +52,31 @@ function plot_plume_agents_3d(positions, trajectory, plume_state, params)
         if size(traj_i, 2) == 3
             plot3(traj_i(:,1), traj_i(:,2), traj_i(:,3), '-', ...
                   'Color', colors(i,:), 'LineWidth', 2, ...
-                  'DisplayName', sprintf('AUV %d轨迹', i));
+                  'DisplayName', sprintf('AUV %d trajectory', i));
             scatter3(traj_i(1,1), traj_i(1,2), traj_i(1,3), 50, ...
                      colors(i,:), 'o', 'MarkerEdgeColor', colors(i,:), ...
                      'MarkerFaceColor', 'none', 'LineWidth', 1.5, ...
                      'HandleVisibility', 'off');
             scatter3(positions(i,1), positions(i,2), positions(i,3), 150, ...
                      colors(i,:), 's', 'filled', 'MarkerEdgeColor', 'k', ...
-                     'LineWidth', 1.5, 'DisplayName', sprintf('AUV %d最终位置', i));
+                     'LineWidth', 1.5, 'DisplayName', sprintf('AUV %d final position', i));
         end
     end
 
     scatter3(params.plume.source_pos(1), params.plume.source_pos(2), ...
              params.plume.source_pos(3), 300, 'r', 'p', 'filled', ...
-             'MarkerEdgeColor', 'k', 'DisplayName', '溢油源');
+             'MarkerEdgeColor', 'k', 'DisplayName', 'Oil source');
 
     hold off;
 
     if exist('C_slice_vis', 'var') && any(~isnan(C_slice_vis(:)))
         caxis([th_outer, C_max]);
         cb = colorbar;
-        cb.Label.String = '浓度 (kg/m³)';
+        cb.Label.String = 'Concentration (kg/m^3)';
     end
 
     xlabel('X (m)', 'FontSize', 12); ylabel('Y (m)', 'FontSize', 12); zlabel('Z (m)', 'FontSize', 12);
-    title('自适应覆盖 — 动态扩散边界追踪', 'FontSize', 14);
+    title('Adaptive Coverage with Dynamic Boundary Tracking', 'FontSize', 14);
     axis equal; view(3); grid on;
     legend('Location', 'northeastoutside', 'FontSize', 8);
     set(gca, 'FontSize', 11);

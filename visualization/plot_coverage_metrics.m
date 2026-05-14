@@ -7,7 +7,7 @@ function plot_coverage_metrics(cr_proposed, cr_cvt, cr_lawnmower, ...
 %   rmse_proposed, rmse_cvt, rmse_lawnmower: 1 x steps 边界追踪RMSE
 %   params: 参数结构体
 
-    figure('Name', '动态覆盖率与边界追踪RMSE', 'Position', [80 80 950 700]);
+    figure('Name', 'Dynamic Coverage Ratio and Boundary RMSE', 'Position', [80 80 950 700]);
     t = params.sim.pre_release_time + (0:length(cr_proposed)-1) * params.algorithm.dt;
 
     % 平滑窗口
@@ -24,9 +24,9 @@ function plot_coverage_metrics(cr_proposed, cr_cvt, cr_lawnmower, ...
     plot(t, cr_c, 'g:', 'LineWidth', 2);
     plot(t, cr_p, 'b-', 'LineWidth', 2.5);
     hold off;
-    xlabel('泄漏时间 (s)', 'FontSize', 11);
-    ylabel('动态覆盖率 (%)', 'FontSize', 11);
-    title('动态覆盖率随时间变化', 'FontSize', 13);
+    xlabel('Leak Time (s)', 'FontSize', 11);
+    ylabel('Dynamic Coverage Ratio (%)', 'FontSize', 11);
+    title('Dynamic Coverage Ratio over Time', 'FontSize', 13);
     legend('Lawnmower CPP', 'Standard CVT', 'Proposed CVT-DBT', 'Location', 'best', 'FontSize', 10);
     grid on;
     ylim([0 100]);
@@ -46,9 +46,9 @@ function plot_coverage_metrics(cr_proposed, cr_cvt, cr_lawnmower, ...
     yline(params.agent.sense_radius, 'k-.', 'LineWidth', 1.2, ...
         'Label', sprintf('R_s=%dm', params.agent.sense_radius), 'FontSize', 9);
     hold off;
-    xlabel('泄漏时间 (s)', 'FontSize', 11);
-    ylabel('边界追踪 RMSE e_b (m)', 'FontSize', 11);
-    title('边界追踪均方根误差对比', 'FontSize', 13);
+    xlabel('Leak Time (s)', 'FontSize', 11);
+    ylabel('Boundary Tracking RMSE e_b (m)', 'FontSize', 11);
+    title('Boundary Tracking RMSE Comparison', 'FontSize', 13);
     legend('Lawnmower CPP', 'Standard CVT', 'Proposed CVT-DBT', 'Location', 'best', 'FontSize', 10);
     grid on;
     set(gca, 'FontSize', 10);

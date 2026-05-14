@@ -5,7 +5,7 @@ function plot_control_input(velocities, params)
 %   velocities: steps x n 各AUV实时速度 (m/s)
 %   params: 参数结构体
 
-    figure('Name', 'AUV控制输入', 'Position', [80 80 950 600]);
+    figure('Name', 'AUV Control Inputs', 'Position', [80 80 950 600]);
     steps = size(velocities, 1);
     n = size(velocities, 2);
     t = params.sim.pre_release_time + (0:steps-1) * params.algorithm.dt;
@@ -25,9 +25,9 @@ function plot_control_input(velocities, params)
     yline(params.agent.max_speed, 'k--', 'LineWidth', 1.5, ...
           'DisplayName', sprintf('v_{max}=%.1f m/s', params.agent.max_speed));
     hold off;
-    xlabel('泄漏时间 (s)', 'FontSize', 11);
-    ylabel('线速度 v_i (m/s)', 'FontSize', 11);
-    title('各AUV实时速度', 'FontSize', 13);
+    xlabel('Leak Time (s)', 'FontSize', 11);
+    ylabel('Linear Speed v_i (m/s)', 'FontSize', 11);
+    title('Real-Time AUV Speeds', 'FontSize', 13);
     legend('Location', 'eastoutside', 'FontSize', 8);
     grid on;
     ylim([0, params.agent.max_speed * 1.15]);
@@ -36,14 +36,14 @@ function plot_control_input(velocities, params)
     subplot(2,1,2);
     avg_speed = smoothdata(mean(velocities, 2), 1, 'movmean', win);
     max_speed_t = smoothdata(max(velocities, [], 2), 1, 'movmean', win);
-    plot(t, avg_speed, 'b-', 'LineWidth', 2, 'DisplayName', '平均速度');
+    plot(t, avg_speed, 'b-', 'LineWidth', 2, 'DisplayName', 'Mean Speed');
     hold on;
-    plot(t, max_speed_t, 'r--', 'LineWidth', 1.5, 'DisplayName', '最大速度');
+    plot(t, max_speed_t, 'r--', 'LineWidth', 1.5, 'DisplayName', 'Maximum Speed');
     yline(params.agent.max_speed, 'k--', 'LineWidth', 1.2, 'DisplayName', 'v_{max}');
     hold off;
-    xlabel('泄漏时间 (s)', 'FontSize', 11);
-    ylabel('速度 (m/s)', 'FontSize', 11);
-    title('集群速度统计', 'FontSize', 13);
+    xlabel('Leak Time (s)', 'FontSize', 11);
+    ylabel('Speed (m/s)', 'FontSize', 11);
+    title('Fleet Speed Statistics', 'FontSize', 13);
     legend('Location', 'best', 'FontSize', 10);
     grid on;
     ylim([0, params.agent.max_speed * 1.15]);

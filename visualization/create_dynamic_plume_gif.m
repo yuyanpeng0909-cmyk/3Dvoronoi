@@ -14,7 +14,7 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
     frame_steps = unique(round(linspace(1, steps, frame_count)));
     domain = params.domain;
 
-    fig = figure('Name', '动态溢油扩散与AUV监测GIF', ...
+    fig = figure('Name', 'Dynamic Oil Plume Monitoring GIF', ...
                  'Position', [100 100 1180 780], 'Color', 'w', 'Visible', 'off');
 
     for k = 1:numel(frame_steps)
@@ -37,21 +37,21 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
             if ~isempty(faces_o)
                 patch(ax, 'Faces', faces_o, 'Vertices', verts_o, ...
                       'FaceAlpha', 0.12, 'FaceColor', [1.00 0.78 0.18], 'EdgeColor', 'none', ...
-                      'DisplayName', '扩散边界');
+                      'DisplayName', 'Outer plume boundary');
             end
 
             [faces_m, verts_m] = isosurface(plume_state.X, plume_state.Y, plume_state.Z, plume_state.C, th_mid);
             if ~isempty(faces_m)
                 patch(ax, 'Faces', faces_m, 'Vertices', verts_m, ...
                       'FaceAlpha', 0.18, 'FaceColor', [1.00 0.48 0.05], 'EdgeColor', 'none', ...
-                      'DisplayName', '中浓度羽流');
+                      'DisplayName', 'Medium-concentration plume');
             end
 
             [faces_c, verts_c] = isosurface(plume_state.X, plume_state.Y, plume_state.Z, plume_state.C, th_core);
             if ~isempty(faces_c)
                 patch(ax, 'Faces', faces_c, 'Vertices', verts_c, ...
                       'FaceAlpha', 0.30, 'FaceColor', [0.90 0.05 0.00], 'EdgeColor', 'none', ...
-                      'DisplayName', '高浓度核心');
+                      'DisplayName', 'High-concentration core');
             end
 
             [~, yidx] = min(abs(plume_state.y - params.plume.source_pos(2)));
@@ -66,17 +66,17 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
 
         scatter3(ax, params.plume.source_pos(1), params.plume.source_pos(2), params.plume.source_pos(3), ...
                  360, 'r', 'p', 'filled', 'MarkerEdgeColor', 'k', 'LineWidth', 1.5, ...
-                 'DisplayName', '溢油源');
+                 'DisplayName', 'Oil source');
 
         front_x = min(domain.xmax, params.plume.source_pos(1) + params.plume.u_current * t_leak);
         front_z = min(0, params.plume.source_pos(3) + params.plume.w_buoyancy * t_leak);
         plot3(ax, [front_x front_x], [domain.ymin domain.ymax], [front_z front_z], ...
-              'k--', 'LineWidth', 1.3, 'DisplayName', '扩散前沿');
+              'k--', 'LineWidth', 1.3, 'DisplayName', 'Plume front');
 
         for i = 1:n_agents
             traj_i = reshape(trajectory_vis(1:step, i, :), step, 3);
             if i <= 4
-                display_name = sprintf('AUV %d轨迹', i);
+                display_name = sprintf('AUV %d trajectory', i);
                 handle_visibility = 'on';
             else
                 display_name = '';
@@ -100,7 +100,7 @@ function create_dynamic_plume_gif(trajectory, params, save_path)
         camlight(ax, 'headlight');
         lighting(ax, 'gouraud');
         xlabel(ax, 'X (m)'); ylabel(ax, 'Y (m)'); zlabel(ax, 'Z (m)');
-        title(ax, sprintf('动态溢油源扩散与AUV实时监测  监测t = %.0f s，泄漏已持续 %.0f s', t_monitor, t_leak), 'FontSize', 14);
+        title(ax, sprintf('Dynamic Oil Plume Diffusion and AUV Monitoring: monitor t = %.0f s, leak t = %.0f s', t_monitor, t_leak), 'FontSize', 14);
         legend(ax, 'Location', 'northeastoutside', 'FontSize', 7);
         set(ax, 'FontSize', 10);
         drawnow;

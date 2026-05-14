@@ -132,6 +132,7 @@ function write_step8_analysis(save_dir, H_proposed, H_cvt, H_lawnmower, ...
     fprintf(fid, '| step8_coverage_quality.png | Proposed CVT-DBT、Standard CVT、Lawnmower CPP三种覆盖质量曲线 | 验证自适应方法的覆盖质量优势 |\n');
     fprintf(fid, '| step8_plume_agents_tracking.png | 三维羽流等值面、AUV彩色轨迹、最终位置 | 验证智能体颜色区分和动态边界追踪 |\n');
     fprintf(fid, '| step8_voronoi_3d.png | 三维Voronoi透明区域面片 | 验证不同AUV负责不同空间区域 |\n');
+    fprintf(fid, '| step8_coverage_regions_3d.png | 最终时刻8台AUV实际感知覆盖的羽流体积、未覆盖羽流体积和感知半径球 | 验证CR(t)对应的是有限感知半径内的实际覆盖，而非Voronoi责任区 |\n');
     fprintf(fid, '| step8_boundary_tracking.png | 羽流体积、边界距离和三种方法RMSE随时间变化 | 验证Proposed方法的边界追踪精度优于基准 |\n');
     fprintf(fid, '| step8_coverage_metrics.png | 动态覆盖率CR(t)和边界追踪RMSE双面板对比 | 量化验证Proposed方法在覆盖率持续性和边界保真度上的优势 |\n');
     fprintf(fid, '| step8_control_input.png | 8台AUV实时速度曲线和集群速度统计 | 验证控制输入有界、无高频震荡、未超出AUV物理极限 |\n');

@@ -1,6 +1,6 @@
 function test_step8_dynamic_tracking()
 % test_step8_dynamic_tracking - Step 8 测试：动态扩散边界追踪
-% 运行方式: cd 到项目根目录, addpath(genpath('.')), test_step8_dynamic_tracking
+% 运行方式: cd到项目根目录后显式addpath('.', 'coverage_control', 'comparison_methods', 'density_function', 'plume_model', 'visualization', 'tests')，再运行 test_step8_dynamic_tracking
 %
 % 对比三种方法: Proposed CVT-DBT / Standard CVT / Lawnmower CPP
 
@@ -160,6 +160,9 @@ try
 
     plot_voronoi_3d(pos_proposed, t_final_leak, params);
     exportgraphics(gcf, fullfile(save_dir, 'step8_voronoi_3d.png'), 'Resolution', 150);
+
+    plot_coverage_regions_3d(pos_proposed, plume_state, params);
+    exportgraphics(gcf, fullfile(save_dir, 'step8_coverage_regions_3d.png'), 'Resolution', 150);
 
     plot_boundary_tracking(boundary_distances, plume_extent, rmse_proposed, rmse_cvt, rmse_lawnmower, params);
     exportgraphics(gcf, fullfile(save_dir, 'step8_boundary_tracking.png'), 'Resolution', 150);

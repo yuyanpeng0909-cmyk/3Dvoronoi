@@ -7,7 +7,7 @@ function plot_results(H_proposed, H_cvt, H_lawnmower, params)
 %   H_proposed, H_cvt, H_lawnmower: 1 x steps 覆盖质量数组
 %   params: 参数结构体
 
-    figure('Name', '覆盖质量对比', 'Position', [100 100 900 550]);
+    figure('Name', 'Coverage Quality Comparison', 'Position', [100 100 900 550]);
 
     t = params.sim.pre_release_time + (0:length(H_proposed)-1) * params.algorithm.dt;
 
@@ -49,10 +49,10 @@ function plot_results(H_proposed, H_cvt, H_lawnmower, params)
          'Color', 'r', 'FontSize', 11, 'VerticalAlignment', 'top');
 
     hold off;
-    xlabel('泄漏时间 (s)', 'FontSize', 12); ylabel('覆盖质量 H(t)', 'FontSize', 12);
-    title('三种覆盖方法的覆盖质量对比', 'FontSize', 14);
+    xlabel('Leak Time (s)', 'FontSize', 12); ylabel('Coverage Quality H(t)', 'FontSize', 12);
+    title('Coverage Quality Comparison of Three Methods', 'FontSize', 14);
     if ~isempty(trend_handle)
-        legend('Lawnmower CPP', 'Standard CVT', 'Proposed CVT-DBT', 'Proposed趋势拟合', 'Location', 'best', 'FontSize', 11);
+        legend('Lawnmower CPP', 'Standard CVT', 'Proposed CVT-DBT', 'Proposed Trend Fit', 'Location', 'best', 'FontSize', 11);
     else
         legend('Lawnmower CPP', 'Standard CVT', 'Proposed CVT-DBT', 'Location', 'best', 'FontSize', 11);
     end

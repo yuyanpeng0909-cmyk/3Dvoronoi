@@ -10,7 +10,7 @@ function plot_voronoi_3d(agent_positions, t, params)
     plume_state = update_plume(t, params);
     C_max = max(plume_state.C(:));
 
-    figure('Name', '三维Voronoi剖分', 'Position', [100 100 1050 780]);
+    figure('Name', '3D Voronoi Partition', 'Position', [100 100 1050 780]);
     hold on;
     n = size(agent_positions, 1);
     colors = lines(n);
@@ -21,7 +21,7 @@ function plot_voronoi_3d(agent_positions, t, params)
         if ~isempty(faces_pl)
             patch('Faces', faces_pl, 'Vertices', verts_pl, ...
                   'FaceAlpha', 0.08, 'FaceColor', [1 0.45 0], 'EdgeColor', 'none', ...
-                  'DisplayName', '溢油扩散边界');
+                  'DisplayName', 'Oil plume boundary');
         end
     end
 
@@ -59,7 +59,7 @@ function plot_voronoi_3d(agent_positions, t, params)
             if ~isempty(faces_i)
                 patch('Faces', faces_i, 'Vertices', verts_i, ...
                       'FaceAlpha', 0.10, 'FaceColor', colors(i,:), 'EdgeColor', 'none', ...
-                      'DisplayName', sprintf('AUV %d覆盖区域', i));
+                      'DisplayName', sprintf('AUV %d region', i));
             end
             continue;
         end
@@ -88,22 +88,22 @@ function plot_voronoi_3d(agent_positions, t, params)
                 pts = pts(idx, :);
             end
             scatter3(pts(:,1), pts(:,2), pts(:,3), 15, colors(i,:), 'filled', ...
-                     'MarkerFaceAlpha', 0.25, 'DisplayName', sprintf('AUV %d覆盖区域', i));
+                     'MarkerFaceAlpha', 0.25, 'DisplayName', sprintf('AUV %d region', i));
         else
             patch('Faces', faces_i, 'Vertices', verts_i, ...
                   'FaceAlpha', 0.22, 'FaceColor', colors(i,:), 'EdgeColor', 'none', ...
-                  'DisplayName', sprintf('AUV %d覆盖区域', i));
+                  'DisplayName', sprintf('AUV %d region', i));
         end
     end
 
     scatter3(params.plume.source_pos(1), params.plume.source_pos(2), ...
              params.plume.source_pos(3), 320, 'r', 'p', 'filled', ...
-             'MarkerEdgeColor', 'k', 'DisplayName', '溢油源');
+             'MarkerEdgeColor', 'k', 'DisplayName', 'Oil source');
 
     camlight('headlight'); lighting gouraud;
     hold off;
     xlabel('X (m)', 'FontSize', 12); ylabel('Y (m)', 'FontSize', 12); zlabel('Z (m)', 'FontSize', 12);
-    title(sprintf('三维Voronoi动态覆盖区域（透明区域面片，t=%.0fs）', t), 'FontSize', 14);
+    title(sprintf('3D Voronoi Dynamic Coverage Regions (t = %.0f s)', t), 'FontSize', 14);
     axis equal; view(3); grid on;
     legend('Location', 'northeastoutside', 'FontSize', 8);
     set(gca, 'FontSize', 11);
